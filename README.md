@@ -4,6 +4,7 @@ First of all, in a linux system, create a virtual enviroment with python 3.9 .
 Then install requirements in the two txt tiles:
 
 pip install -r requirements_tf.txt
+
 pip install -r requirements_torch_catnet.txt
 
 For any problem i leave a .yml file to clone my enviroment. 
