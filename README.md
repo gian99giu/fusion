@@ -14,7 +14,6 @@ The part of the code that uses torch is perfectly compatible with torch = 1.7.1 
 The you need to install the pretrained weights of this net, run: bash download_fusion_weights.sh, then you have to download CAT and comprint weights, and put the in the right filesystem.
 Then it is possible to execute the code.
 There is still a problem in the execution in the .ipynb file .
-It gives 2 errors: the first about a difficut to extract some PILLOW libraries, and the other about Symbolic Tensor don't have attribute numpy() . This file shows a bigger problem, it gives always different and wrong outputs (?) .
 
 It is sufficient, to get the final output:
 1) run the run_forgery_detection_fusion useful.ipynb file, so you can get the result of ADQ1, comprint etc...
