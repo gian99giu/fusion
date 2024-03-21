@@ -3,7 +3,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-
+import tensorflow as tf
 
 def show_image(image_path, figsize=(8,8)):
     img_pil = Image.open(image_path)
@@ -21,6 +21,10 @@ def create_output_image_path(input_image_path, output_folder, method, output_typ
     output_image_path = os.path.join(output_folder, output_image_name)
 
     return output_image_path
+
+# This assumes all previous forgery detection methods have been run before, and the corresponding npz files are available
+tf.config.run_functions_eagerly(True)
+
 input_image_path = "./examples_input/denise_m23.jpg"
 output_folder = "./examples_output"
 output_image_path_adq1 = create_output_image_path(input_image_path, output_folder, "ADQ1")
@@ -35,9 +39,6 @@ output_file_heatmap_path_comprint_plus_noisprint = create_output_image_path(inpu
 output_file_heatmap_path_catnet = create_output_image_path(input_image_path, output_folder, "CATNet")
 catnet_modelpath = "./CAT-Net/output/splicing_dataset/CAT_full/CAT_full_v2.pth.tar"
 output_file_heatmap_path_fusion_idlab = create_output_image_path(input_image_path, output_folder, "FusionIDLab")
-# This assumes all previous forgery detection methods have been run before, and the corresponding npz files are available
-import tensorflow as tf
-tf.config.run_functions_eagerly(True)
 
 fusion_idlab_model = "./models/training_checkpoints_faceswap+imd2020+openforensics_balanced_all_methods_just_heatmaps+original_image_l2_batch1_40epochs_v11_only_latest"
 
