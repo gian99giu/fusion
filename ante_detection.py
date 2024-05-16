@@ -24,8 +24,11 @@ def create_output_image_path(input_image_path, output_folder, method, output_typ
     return output_image_path
 
 def ante_fusion(plot_figs=False):
-    output_folder = "./out2"
     input_image_path = sys.argv[1]
+    output_folder = sys.argv[2]
+    figs=sys.argv[3]
+    if figs=='True':
+        plot_figs=True
     show_image(input_image_path,plot=plot_figs)
     import forgery_detection
     output_image_path_adq1 = create_output_image_path(input_image_path, output_folder, "ADQ1")
@@ -50,7 +53,7 @@ def ante_fusion(plot_figs=False):
     show_image(output_file_heatmap_path_noiseprint,plot=plot_figs)
     output_file_heatmap_path_comprint = create_output_image_path(input_image_path, output_folder, "Comprint", output_type="heatmap")
     output_file_fingerprint_path_comprint = create_output_image_path(input_image_path, output_folder, "Comprint", output_type="fingerprint")    
-    comprint_model_path = "./comprint/models/Comprint_Siamese_Full_jpg_ps_full/"
+    comprint_model_path = "comprint/models/Comprint_Siamese_Full_jpg_ps_full/"
     forgery_detection_comprint_noiseprint.comprint(input_image_path, output_file_fingerprint_path_comprint, output_file_heatmap_path_comprint, comprint_model_path)
     show_image(output_file_fingerprint_path_comprint,plot=plot_figs)
     show_image(output_file_heatmap_path_comprint,plot=plot_figs)

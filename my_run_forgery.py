@@ -4,13 +4,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import tensorflow as tf
+import sys
 
-def show_image(image_path, figsize=(8,8)):
-    img_pil = Image.open(image_path)
-    fig, ax = plt.subplots(figsize=figsize)
-    ax.imshow(np.array(img_pil).astype(np.uint8))
-    ax.grid(False)
-    plt.show()
+def show_image(image_path, plot=False, fs=(8,8)):
+    if plot:
+        img_pil = Image.open(image_path)
+        fig, ax = plt.subplots(figsize=fs)
+        ax.imshow(np.array(img_pil).astype(np.uint8))
+        ax.grid(False)
+        plt.show()
 
 def create_output_image_path(input_image_path, output_folder, method, output_type="heatmap"):
     # Extract the filename from the input image path
@@ -25,8 +27,12 @@ def create_output_image_path(input_image_path, output_folder, method, output_typ
 # This assumes all previous forgery detection methods have been run before, and the corresponding npz files are available
 tf.config.run_functions_eagerly(True)
 
-input_image_path = "./examples_input/denise_m23.jpg"
-output_folder = "./examples_output"
+input_image_path = sys.argv[1]
+output_folder = sys.argv[2]
+plot=sys.argv[3]
+
+
+    
 output_image_path_adq1 = create_output_image_path(input_image_path, output_folder, "ADQ1")
 output_image_path_blk = create_output_image_path(input_image_path, output_folder, "BLK")
 output_image_path_dct = create_output_image_path(input_image_path, output_folder, "DCT")
@@ -54,4 +60,4 @@ forgery_detection_fusion_idlab.run_fusion_idlab(
     output_file_heatmap_path_noiseprint,
     output_file_heatmap_path_fusion_idlab,
     fusion_idlab_model, use_gpu=True)
-show_image(output_file_heatmap_path_fusion_idlab)
+show_image(output_file_heatmap_path_fusion_idlab,plot=plot)
