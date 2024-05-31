@@ -1,11 +1,9 @@
 Hello,
 To make this code works:
 First of all, in a linux system, create a virtual enviroment with python 3.9 .
-Then install requirements in the two txt tiles:
+Then install requirements:
 
-pip install -r requirements_tf.txt
-
-pip install -r requirements_torch_catnet.txt
+pip install -r requirements.txt
 
 For any problem i leave a .yml file to clone my enviroment. 
 
