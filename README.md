@@ -20,3 +20,12 @@ It is sufficient, to get the final output:
 1) run the run_forgery_detection_fusion useful.ipynb file, so you can get the result of ADQ1, comprint etc...
 2) run my_fusion.py, to get the fusion
 
+
+About Intersectuion:
+The code creates IoU for all images in a folder called 'IMDV2', it's simply a random subset of IMD2020 dataset. The results of fusion for IMD2020 dataset should be in 'results imd2020' folder, change these directories accordingly with your modifications. 
+
+About Oracle:
+First you need the folder of intersection created above. 
+The oracle consider all the images of IoU produces 2 images:
+  The first one consider all the pixel, in common with the ground truth, that were been detected, by all methods, as an artifact.
+  The second one considers all the pixel, not in common with the ground, that have been detected, by all metods as an arrtifact.
