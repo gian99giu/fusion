@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from time import time
-
+from tensorflow import keras as ks
 import tensorflow as tf
 from comprint.code.splicebuster.noiseprint.noiseprint_blind_concat import genMappFloat
 from comprint.code.splicebuster.noiseprint.post_em import EMgu_img, getSpamFromNoiseprint
@@ -87,10 +87,11 @@ def comprint(input_file_path, output_file_fingerprint_path, output_file_heatmap_
     with tf.device(device):
         # Load model if not loaded before
         if isinstance(model, str):
-            model_network = comprint_network.Siamese_Network()
-            model_network.build([None, None, None, 1])
-            model_network.load_weights(model).expect_partial() 
-            model = model_network
+            model = ks.models.load_model('./comprint/models/Comprint_Siamese_Full_jpg_ps_full')
+            #model_network = comprint_network.Siamese_Network()
+            #model_network.build([None, None, None, 1])
+            #model_network.load_weights(model).expect_partial() 
+            #model = model_network
 
         # Load image
         img = load_image(input_file_path, channels=1).astype(np.float32)
@@ -122,6 +123,7 @@ def comprint(input_file_path, output_file_fingerprint_path, output_file_heatmap_
     save_heatmap_to_file(heatmap, output_file_heatmap_path)
 
     save_image_to_npz_file(heatmap, output_file_heatmap_path)
+    
 
 
 def comprint_tiled(img, model, slide=1024):
