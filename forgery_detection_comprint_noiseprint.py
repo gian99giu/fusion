@@ -104,7 +104,7 @@ def comprint(input_file_path, output_file_fingerprint_path, output_file_heatmap_
         t = time()
         fingerprint = comprint_tiled(img, model, slide=slide)
         print("Fingerprint extracted in %.2f sec." % (time() - t))
-
+    print(output_file_fingerprint_path)
     if output_file_fingerprint_path:
         save_fingerprint_to_file(fingerprint, output_file_fingerprint_path)
         #save_image_to_file(fingerprint, output_file_fingerprint_path)
@@ -121,7 +121,7 @@ def comprint(input_file_path, output_file_fingerprint_path, output_file_heatmap_
     heatmap = calculate_spam_em_heatmap([fingerprint], img_gray)
     print("Heatmap extracted in %.2f sec." % (time() - t))
     save_heatmap_to_file(heatmap, output_file_heatmap_path)
-
+    print(output_file_heatmap_path)
     save_image_to_npz_file(heatmap, output_file_heatmap_path)
     
 
